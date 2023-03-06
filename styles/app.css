@@ -1,0 +1,134 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #009578;
+}
+
+h1 {
+  width: fit-content;
+  margin: 0 auto;
+  color: #fff;
+  margin-top: 20px;
+}
+
+.container {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.column {
+  background-color: rgba(0, 92, 80, 0.5);
+  flex: 1;
+  padding: 20px;
+  margin: 0 10px;
+  border-radius: 5px;
+}
+
+h2 {
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.task {
+  border-radius: 5px;
+  position: relative;
+  width: 100%;
+  padding: 10px 0;
+  margin-bottom: 5px;
+  padding-left: 15px;
+  font-size: 16px;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.task-content {
+  position: relative;
+}
+
+.task-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+
+.task-edit,
+.task-delete {
+  margin-left: 10px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  color: #fff;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.task-edit:hover {
+  background-color: #0069d9;
+}
+
+.task-edit {
+  background-color: #007bff;
+}
+
+.task-delete {
+  background-color: #dc3545;
+}
+.task-delete:hover {
+  background-color: #c82333;
+}
+
+.drop-area {
+  height: 10px;
+  transition: background 0.3s ease, height 0.3s ease;
+}
+
+.drop-area-active {
+  height: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.add-task {
+  font-size: 16px;
+  display: block;
+  width: 100%;
+  color: #fff;
+  background-color: #00866d;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-task:hover {
+  background-color: #00705a;
+}
+
+@media (max-width: 767px) {
+  .container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .column {
+    margin: 10px 0;
+  }
+}
