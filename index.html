@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="styles/app.css" />
+    <script src="scripts/app.js"></script>
+    <title>Kalbonyan Board</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Kalbonyan Board</h1>
+      <div class="column">
+        <h2 class="column-title">Not Started</h2>
+        <div class="tasks">
+          <div>
+            <p class="task" contenteditable="false">Task 01</p>
+            <div class="task-actions">
+              <button class="task-edit"><i class="fas fa-edit"></i></button>
+              <button class="task-delete">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </div>
+          </div>
+          <button class="add-task"><i class="fa-solid fa-plus"></i>Add</button>
+        </div>
+      </div>
+      <div class="column">
+        <h2 class="column-title">In Progress</h2>
+        <div class="tasks">
+          <div>
+            <p class="task" contenteditable="false">Task 02</p>
+            <div class="task-actions">
+              <button class="task-edit"><i class="fas fa-edit"></i></button>
+              <button class="task-delete">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </div>
+          </div>
+          <button class="add-task"><i class="fa-solid fa-plus"></i>Add</button>
+        </div>
+      </div>
+      <div class="column">
+        <h2 class="column-title">Completed</h2>
+        <div class="tasks">
+          <div>
+            <p class="task" contenteditable="false">Task 02</p>
+            <div class="task-actions">
+              <button class="task-edit"><i class="fas fa-edit"></i></button>
+              <button class="task-delete">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </div>
+          </div>
+          <button class="add-task"><i class="fa-solid fa-plus"></i>Add</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
