@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+
   margin: 0;
   padding: 0;
 }
@@ -9,9 +10,11 @@ body {
 }
 
 h1 {
-  width: fit-content;
-  margin: 0 auto;
   color: #fff;
+
+  width: fit-content;
+
+  margin: 0 auto;
   margin-top: 20px;
 }
 
@@ -20,14 +23,18 @@ h1 {
   align-items: start;
   justify-content: space-between;
   flex-wrap: wrap;
+
   max-width: 1200px;
+
   margin: 0 auto;
   padding: 20px;
 }
 
 .column {
-  background-color: #380e39;
   flex: 1;
+
+  background-color: #380e39;
+
   padding: 20px;
   margin: 0 10px;
   border-radius: 5px;
@@ -39,15 +46,19 @@ h2 {
 }
 
 .task {
-  border-radius: 5px;
-  position: relative;
-  width: 100%;
-  padding: 10px 0;
-  margin-bottom: 5px;
-  padding-left: 15px;
   font-size: 16px;
+  width: 100%;
+
   background-color: #eee;
   border: 1px solid #ccc;
+  border-radius: 5px;
+
+  position: relative;
+
+  margin-bottom: 5px;
+  padding: 10px 0;
+  padding-left: 15px;
+
   cursor: pointer;
 }
 
@@ -59,6 +70,7 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: center;
+
   position: absolute;
   top: 50%;
   right: 10px;
@@ -67,22 +79,25 @@ h2 {
 
 .task-edit,
 .task-delete {
+  color: #fff;
+  font-weight: bold;
+
   margin-left: 10px;
   padding: 5px 10px;
+
   border: none;
   border-radius: 5px;
-  font-weight: bold;
-  color: #fff;
+
   transition: background-color 0.3s ease;
   cursor: pointer;
 }
 
-.task-edit:hover {
-  background-color: #b024c9;
-}
-
 .task-edit {
   background-color: #812d8f;
+}
+
+.task-edit:hover {
+  background-color: #b024c9;
 }
 
 .task-delete {
@@ -99,23 +114,30 @@ h2 {
 
 .drop-area-active {
   height: 20px;
+
   background-color: rgba(255, 255, 255, 0.5);
+
   border-radius: 5px;
   margin-bottom: 5px;
 }
 
 .add-task {
-  font-size: 16px;
-  display: block;
-  width: 100%;
   color: #fff;
   background-color: #84308f;
+
+  font-size: 16px;
+
+  width: 100%;
+  display: block;
+
   padding: 10px;
   margin-bottom: 10px;
+
   border: none;
   border-radius: 5px;
-  cursor: pointer;
+
   transition: background-color 0.3s ease;
+  cursor: pointer;
 }
 
 .add-task:hover {
