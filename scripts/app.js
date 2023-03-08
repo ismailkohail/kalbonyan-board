@@ -26,6 +26,17 @@ function fetchTasks() {
   return JSON.parse(tasksData);
 }
 
+// Create a Task
+
+function createTask(targetColumnId, taskContent) {
+  const tasksData = fetchTasks();
+  const targetColumn = tasksData.find((column) => column.id == targetColumnId);
+  targetColumn.tasks.push({
+    id: "" + new Date().getTime(),
+    taskContent,
+  });
+  saveTasks(tasksData);
+}
 // Save Tasks
 
 function saveTasks(tasksData) {
@@ -39,6 +50,19 @@ function taskToAdd(addTaskBtn, targetColumnId) {
     taskInput.className = "task";
     taskInput.contentEditable = "true";
     taskInput.style.cursor = "auto";
+
+    // Save the task when a click occurs outside the task box
+
+    taskInput.addEventListener("blur", function () {
+      taskInput.contentEditable = false;
+      taskInput.style.cursor = "pointer";
+
+      if (taskInput.textContent !== "") {
+        createTask(targetColumnId, taskInput.textContent);
+      } else {
+        render();
+      }
+    });
 
     const tasksList = addTaskBtn.parentElement.querySelector(".tasks");
     tasksList.appendChild(taskInput);
