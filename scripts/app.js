@@ -49,6 +49,20 @@ function deleteTask(taskId) {
   saveTasks(tasksData);
 }
 
+// Update a Task
+
+function updateTask(taskId, taskContent) {
+  const tasksData = fetchTasks();
+  for (const column of tasksData) {
+    const task = column.tasks.find((task) => task.id === taskId);
+    if (task) {
+      task.taskContent = taskContent;
+      break;
+    }
+  }
+  saveTasks(tasksData);
+}
+
 // Save Tasks
 
 function saveTasks(tasksData) {
@@ -88,6 +102,28 @@ function taskToDeleteHandler() {
   deleteTask(targetTaskId);
 }
 
+function taskToUpdateHandler() {
+  const taskToUpdate = this.parentNode.previousElementSibling;
+  const taskId = taskToUpdate.id;
+  taskToUpdate.contentEditable = "true";
+  taskToUpdate.focus();
+
+  // Select all text inside the task When edit btn is clicked
+
+  const range = document.createRange();
+  range.selectNodeContents(taskToUpdate);
+  const selection = window.getSelection();
+  selection.removeAllRanges();
+  selection.addRange(range);
+
+  // Update the task when a click occurs outside the task box
+
+  taskToUpdate.addEventListener("blur", function () {
+    taskToUpdate.contentEditable = false;
+    updateTask(taskId, taskToUpdate.textContent);
+  });
+}
+
 function renderTasks(columnId) {
   const tasksData = fetchTasks();
   const tasksColumn = tasksData.find((column) => column.id == columnId);
@@ -112,6 +148,10 @@ function renderTasks(columnId) {
   tasksEl.className = "tasks";
   tasksEl.id = "tasks";
   tasksEl.innerHTML = tasksHtml;
+
+  tasksEl.querySelectorAll(".task-edit").forEach((editBtn) => {
+    editBtn.addEventListener("click", taskToUpdateHandler);
+  });
 
   tasksEl.querySelectorAll(".task-delete").forEach((deleteBtn) => {
     deleteBtn.addEventListener("click", taskToDeleteHandler);
