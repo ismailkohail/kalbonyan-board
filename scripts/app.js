@@ -116,11 +116,25 @@ function taskToUpdateHandler() {
   selection.removeAllRanges();
   selection.addRange(range);
 
+  const originalTaskContent = taskToUpdate.textContent;
+
   // Update the task when a click occurs outside the task box
 
   taskToUpdate.addEventListener("blur", function () {
+    // Disable content editing
     taskToUpdate.contentEditable = false;
-    updateTask(taskId, taskToUpdate.textContent);
+
+    // Get the updated task content
+    const updatedTaskContent = taskToUpdate.textContent.trim();
+
+    if (
+      updatedTaskContent !== originalTaskContent &&
+      updatedTaskContent !== ""
+    ) {
+      updateTask(taskId, updatedTaskContent);
+    } else {
+      render();
+    }
   });
 }
 
