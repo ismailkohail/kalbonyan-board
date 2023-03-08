@@ -1,28 +1,39 @@
 const containerRoot = document.querySelector(".container");
-const tasksData = [
-  {
-    id: 1,
-    title: "Not Started",
-    tasks: [{ id: "1678291428198", taskContent: "Task 01" }],
-  },
-  {
-    id: 2,
-    title: "In Progress",
-    tasks: [
-      { id: "1678291433243", taskContent: "Task 03" },
-      { id: "1678291435619", taskContent: "Task 02" },
-      { id: "1678291473965", taskContent: "Task 04" },
-    ],
-  },
-  {
-    id: 3,
-    title: "Completed",
-    tasks: [
-      { id: "1678291437769", taskContent: "Task 05" },
-      { id: "1678291807152", taskContent: "Task 01" },
-    ],
-  },
-];
+
+// Fetch Tasks from localSorage
+
+function fetchTasks() {
+  const tasksData = localStorage.getItem("Kalbonyan");
+  if (!tasksData) {
+    return [
+      {
+        id: 1,
+        title: "Not Started",
+        tasks: [],
+      },
+      {
+        id: 2,
+        title: "In Progress",
+        tasks: [],
+      },
+      {
+        id: 3,
+        title: "Completed",
+        tasks: [],
+      },
+    ];
+  }
+  return JSON.parse(tasksData);
+}
+
+// Save Tasks
+
+function saveTasks(tasksData) {
+  localStorage.setItem("Kalbonyan", JSON.stringify(tasksData));
+  renderColumns();
+}
+
+const tasksData = fetchTasks();
 
 function taskToAdd(addTaskBtn, targetColumnId) {
   addTaskBtn.addEventListener("click", () => {
