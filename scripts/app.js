@@ -24,6 +24,19 @@ const tasksData = [
   },
 ];
 
+function taskToAdd(addTaskBtn, targetColumnId) {
+  addTaskBtn.addEventListener("click", () => {
+    const taskInput = document.createElement("div");
+    taskInput.className = "task";
+    taskInput.contentEditable = "true";
+    taskInput.style.cursor = "auto";
+
+    const tasksList = addTaskBtn.parentElement.querySelector(".tasks");
+    tasksList.appendChild(taskInput);
+    taskInput.focus();
+  });
+}
+
 function renderTasks(columnId) {
   const tasksColumn = tasksData.find((column) => column.id == columnId);
 
@@ -70,6 +83,8 @@ function render() {
     addTaskBtn.className = "add-task";
     addTaskBtn.innerHTML = `<i class="fa-solid fa-plus"></i> Add`;
     columnEl.appendChild(addTaskBtn);
+
+    taskToAdd(addTaskBtn, column.id);
 
     containerRoot.appendChild(columnEl);
   });
