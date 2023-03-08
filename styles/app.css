@@ -5,7 +5,7 @@
 }
 
 body {
-  background-color: #009578;
+  background-color: #802d8b;
 }
 
 h1 {
@@ -26,7 +26,7 @@ h1 {
 }
 
 .column {
-  background-color: rgba(0, 92, 80, 0.5);
+  background-color: #380e39;
   flex: 1;
   padding: 20px;
   margin: 0 10px;
@@ -78,18 +78,18 @@ h2 {
 }
 
 .task-edit:hover {
-  background-color: #0069d9;
+  background-color: #b024c9;
 }
 
 .task-edit {
-  background-color: #007bff;
+  background-color: #812d8f;
 }
 
 .task-delete {
-  background-color: #dc3545;
+  background-color: #370e38;
 }
 .task-delete:hover {
-  background-color: #c82333;
+  background-color: #660d68;
 }
 
 .drop-area {
@@ -99,7 +99,7 @@ h2 {
 
 .drop-area-active {
   height: 20px;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(255, 255, 255, 0.5);
   border-radius: 5px;
   margin-bottom: 5px;
 }
@@ -109,7 +109,7 @@ h2 {
   display: block;
   width: 100%;
   color: #fff;
-  background-color: #00866d;
+  background-color: #84308f;
   padding: 10px;
   margin-bottom: 10px;
   border: none;
@@ -119,7 +119,7 @@ h2 {
 }
 
 .add-task:hover {
-  background-color: #00705a;
+  background-color: #601162;
 }
 
 @media (max-width: 767px) {
