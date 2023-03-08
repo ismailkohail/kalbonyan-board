@@ -33,8 +33,6 @@ function saveTasks(tasksData) {
   renderColumns();
 }
 
-const tasksData = fetchTasks();
-
 function taskToAdd(addTaskBtn, targetColumnId) {
   addTaskBtn.addEventListener("click", () => {
     const taskInput = document.createElement("div");
@@ -49,6 +47,7 @@ function taskToAdd(addTaskBtn, targetColumnId) {
 }
 
 function renderTasks(columnId) {
+  const tasksData = fetchTasks();
   const tasksColumn = tasksData.find((column) => column.id == columnId);
 
   let tasksHtml = "";
@@ -76,6 +75,7 @@ function renderTasks(columnId) {
 }
 
 function render() {
+  const tasksData = fetchTasks();
   containerRoot.innerHTML = "";
 
   tasksData.forEach((column) => {
