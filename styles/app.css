@@ -47,6 +47,7 @@ h2 {
 
 .task {
   font-size: 16px;
+  font-weight: 700;
   width: 100%;
 
   background-color: #eee;
@@ -58,6 +59,8 @@ h2 {
   margin-bottom: 5px;
   padding: 10px 0;
   padding-left: 15px;
+
+  overflow-wrap: anywhere;
 
   cursor: pointer;
 }
