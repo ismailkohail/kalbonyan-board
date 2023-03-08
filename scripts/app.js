@@ -77,6 +77,10 @@ function render() {
     columnEl.appendChild(columnTitleEl);
 
     const tasksEl = renderTasks(column.id);
+    if (column.id === 3) {
+      tasksEl.style.textDecoration = "line-through";
+      tasksEl.style.color = "grey";
+    }
     columnEl.appendChild(tasksEl);
 
     const addTaskBtn = document.createElement("button");
