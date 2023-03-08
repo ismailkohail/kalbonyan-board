@@ -41,7 +41,7 @@ function createTask(targetColumnId, taskContent) {
 
 function saveTasks(tasksData) {
   localStorage.setItem("Kalbonyan", JSON.stringify(tasksData));
-  renderColumns();
+  render();
 }
 
 function taskToAdd(addTaskBtn, targetColumnId) {
