@@ -37,6 +37,18 @@ function createTask(targetColumnId, taskContent) {
   });
   saveTasks(tasksData);
 }
+
+// Delete a Task
+
+function deleteTask(taskId) {
+  const tasksData = fetchTasks();
+
+  tasksData.forEach((column) => {
+    column.tasks = column.tasks.filter((task) => task.id !== taskId);
+  });
+  saveTasks(tasksData);
+}
+
 // Save Tasks
 
 function saveTasks(tasksData) {
@@ -70,6 +82,12 @@ function taskToAdd(addTaskBtn, targetColumnId) {
   });
 }
 
+function taskToDeleteHandler() {
+  const taskEl = this.parentNode.previousElementSibling;
+  const targetTaskId = taskEl.id;
+  deleteTask(targetTaskId);
+}
+
 function renderTasks(columnId) {
   const tasksData = fetchTasks();
   const tasksColumn = tasksData.find((column) => column.id == columnId);
@@ -94,6 +112,10 @@ function renderTasks(columnId) {
   tasksEl.className = "tasks";
   tasksEl.id = "tasks";
   tasksEl.innerHTML = tasksHtml;
+
+  tasksEl.querySelectorAll(".task-delete").forEach((deleteBtn) => {
+    deleteBtn.addEventListener("click", taskToDeleteHandler);
+  });
 
   return tasksEl;
 }
