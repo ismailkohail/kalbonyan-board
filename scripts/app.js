@@ -63,6 +63,35 @@ function updateTask(taskId, taskContent) {
   saveTasks(tasksData);
 }
 
+// change the position of a task
+
+function swapTaskPosition(targetColumn, siblingId, dropDirection) {
+  const draggedTaskData = {
+    id: draggedTask.id,
+    taskContent: draggedTask.innerText,
+  };
+
+  deleteTask(draggedTask.id);
+
+  const tasksData = fetchTasks();
+
+  const targetTasksObj = tasksData.find((obj) => obj.id == targetColumn.id);
+
+  let targetTaskPosition = targetTasksObj.tasks.findIndex(
+    (item) => item.id == siblingId
+  );
+
+  if (dropDirection === -1) {
+    // drop above the sibling Task
+    targetTasksObj.tasks.splice(targetTaskPosition, 0, draggedTaskData);
+  } else {
+    // drop below the sibling Task
+    targetTasksObj.tasks.splice(targetTaskPosition + 1, 0, draggedTaskData);
+  }
+
+  saveTasks(tasksData);
+}
+
 // Save Tasks
 
 function saveTasks(tasksData) {
@@ -138,6 +167,65 @@ function taskToUpdateHandler() {
   });
 }
 
+function addDragDropEvents() {
+  // Get all task elements
+  const tasks = document.querySelectorAll(".task");
+
+  // Add a 'dragstart' event listener to each task
+  tasks.forEach((task) => {
+    task.addEventListener("dragstart", dragStartHandler);
+  });
+
+  // Get all drop areas
+  const dropAreas = document.querySelectorAll(".drop-area");
+
+  // Add a 'dragover' event listener to each drop area
+  dropAreas.forEach((dropArea) => {
+    dropArea.addEventListener("dragover", dragOverHandler);
+    dropArea.addEventListener("dragenter", dragEnterHandler);
+    dropArea.addEventListener("dragleave", dragLeaveHandler);
+    dropArea.addEventListener("drop", dragDropHandler);
+  });
+}
+
+let draggedTask;
+
+function dragStartHandler() {
+  draggedTask = this;
+}
+
+function dragOverHandler(e) {
+  e.preventDefault();
+}
+
+function dragEnterHandler(e) {
+  e.preventDefault();
+  this.classList.add("drop-area-active");
+}
+
+function dragLeaveHandler() {
+  this.classList.remove("drop-area-active");
+}
+
+function dragDropHandler(e) {
+  e.preventDefault();
+
+  this.classList.remove("drop-area-active");
+
+  const targetColumn = this.closest(".column");
+
+  const sibling = this.nextElementSibling || this.previousElementSibling;
+  const siblingId = sibling ? sibling.firstElementChild.id : 0;
+
+  const dropDirection = sibling
+    ? sibling === this.nextElementSibling
+      ? -1
+      : 1
+    : 0;
+
+  swapTaskPosition(targetColumn, siblingId, dropDirection);
+}
+
 function renderTasks(columnId) {
   const tasksData = fetchTasks();
   const tasksColumn = tasksData.find((column) => column.id == columnId);
@@ -203,6 +291,7 @@ function render() {
 
     containerRoot.appendChild(columnEl);
   });
+  addDragDropEvents();
 }
 
 render();
