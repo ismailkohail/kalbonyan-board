@@ -63,7 +63,7 @@ h2 {
 
   overflow-wrap: anywhere;
 
-  cursor: pointer;
+  cursor: move;
 }
 
 .task-content {
