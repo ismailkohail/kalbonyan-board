@@ -141,6 +141,7 @@ function taskToUpdateHandler() {
 
   const range = document.createRange();
   range.selectNodeContents(taskToUpdate);
+  range.collapse(false); // set the end position of the range
   const selection = window.getSelection();
   selection.removeAllRanges();
   selection.addRange(range);
