@@ -227,12 +227,11 @@ function dragDropHandler(e) {
   swapTaskPosition(targetColumn, siblingId, dropDirection);
 }
 
-function renderTasks(columnId) {
+function renderTasks(column) {
   const tasksData = fetchTasks();
-  const tasksColumn = tasksData.find((column) => column.id == columnId);
 
   let tasksHtml = "";
-  tasksColumn.tasks.forEach((item) => {
+  column.tasks.forEach((item) => {
     tasksHtml += `
     <div class="drop-area"></div>
       <div class="task-content">
@@ -276,7 +275,7 @@ function render() {
     columnTitleEl.innerText = column.title;
     columnEl.appendChild(columnTitleEl);
 
-    const tasksEl = renderTasks(column.id);
+    const tasksEl = renderTasks(column);
     if (column.id === 3) {
       tasksEl.style.textDecoration = "line-through";
       tasksEl.style.color = "grey";
