@@ -228,11 +228,7 @@ function dragDropHandler(e) {
 }
 
 function renderTasks(column) {
-<<<<<<< HEAD
-=======
-  const tasksData = fetchTasks();
 
->>>>>>> bf3d08b79efc42a63d2632fcfe2727a25e6af0c7
   let tasksHtml = "";
   column.tasks.forEach((item) => {
     tasksHtml += `
