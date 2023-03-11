@@ -3,7 +3,12 @@ const containerRoot = document.querySelector(".container");
 // Fetch Tasks from localSorage
 
 function fetchTasks() {
+  // Get tasks data from localStorage with the key "Kalbonyan"
+
   const tasksData = localStorage.getItem("Kalbonyan");
+
+  // If tasksData is not found, return the default tasks structure
+
   if (!tasksData) {
     return [
       {
@@ -23,18 +28,28 @@ function fetchTasks() {
       },
     ];
   }
+
+  // parse the tasksData from JSON and return it
+
   return JSON.parse(tasksData);
 }
 
 // Create a Task
 
 function createTask(targetColumnId, taskContent) {
+  // Fetch tasks data from localStorage
   const tasksData = fetchTasks();
+
+  // Find the targetColumn object from tasksData with matching id
   const targetColumn = tasksData.find((column) => column.id == targetColumnId);
+
+  // Push the new task object to targetColumn's tasks array
   targetColumn.tasks.push({
     id: "" + new Date().getTime(),
     taskContent,
   });
+
+  // Save the updated tasks data to localStorage
   saveTasks(tasksData);
 }
 
@@ -43,9 +58,11 @@ function createTask(targetColumnId, taskContent) {
 function deleteTask(taskId) {
   const tasksData = fetchTasks();
 
+  // Loop through each column and remove the task with matching taskId
   tasksData.forEach((column) => {
     column.tasks = column.tasks.filter((task) => task.id !== taskId);
   });
+
   saveTasks(tasksData);
 }
 
@@ -53,39 +70,48 @@ function deleteTask(taskId) {
 
 function updateTask(taskId, taskContent) {
   const tasksData = fetchTasks();
+
+  // Loop through each column to find the task with matching taskId
   for (const column of tasksData) {
     const task = column.tasks.find((task) => task.id === taskId);
+
+    // If found, update the task content
     if (task) {
       task.taskContent = taskContent;
       break;
     }
   }
+
   saveTasks(tasksData);
 }
 
 // change the position of a task
 
 function swapTaskPosition(targetColumn, siblingId, dropDirection) {
+  // Get the data of the dragged task
   const draggedTaskData = {
     id: draggedTask.id,
     taskContent: draggedTask.innerText,
   };
 
+  // Delete the dragged task from its previous position
   deleteTask(draggedTask.id);
 
   const tasksData = fetchTasks();
 
+  // Find the targetColumn object from tasksData with matching id
   const targetTasksObj = tasksData.find((obj) => obj.id == targetColumn.id);
 
+  // Find the target task position using the siblingId and dropDirection
   let targetTaskPosition = targetTasksObj.tasks.findIndex(
     (item) => item.id == siblingId
   );
 
   if (dropDirection === -1) {
-    // drop above the sibling Task
+    // If the drop direction is above, insert the dragged task before the sibling task
     targetTasksObj.tasks.splice(targetTaskPosition, 0, draggedTaskData);
   } else {
-    // drop below the sibling Task
+    // If the drop direction is below, insert the dragged task after the sibling task
     targetTasksObj.tasks.splice(targetTaskPosition + 1, 0, draggedTaskData);
   }
 
@@ -99,6 +125,7 @@ function saveTasks(tasksData) {
   render();
 }
 
+// Add a task when the 'add' button is clicked
 function taskToAdd(addTaskBtn, targetColumnId) {
   addTaskBtn.addEventListener("click", () => {
     const taskInput = document.createElement("div");
@@ -119,29 +146,32 @@ function taskToAdd(addTaskBtn, targetColumnId) {
       }
     });
 
+    // Add the new task element to the task list and focus on it
     const tasksList = addTaskBtn.parentElement.querySelector(".tasks");
     tasksList.appendChild(taskInput);
     taskInput.focus();
   });
 }
 
+// Delete a task when the delete button is clicked
 function taskToDeleteHandler() {
   const taskEl = this.parentNode.previousElementSibling;
   const targetTaskId = taskEl.id;
   deleteTask(targetTaskId);
 }
 
+// Update a task when the edit button is clicked
 function taskToUpdateHandler() {
   const taskToUpdate = this.parentNode.previousElementSibling;
   const taskId = taskToUpdate.id;
   taskToUpdate.contentEditable = "true";
   taskToUpdate.focus();
 
-  // Select all text inside the task When edit btn is clicked
+  // Create a new Range object and set it to include all the content
 
   const range = document.createRange();
   range.selectNodeContents(taskToUpdate);
-  range.collapse(false); // set the end position of the range
+  range.collapse(false); // Collapse the Range object to the end of its content
   const selection = window.getSelection();
   selection.removeAllRanges();
   selection.addRange(range);
@@ -168,6 +198,8 @@ function taskToUpdateHandler() {
   });
 }
 
+// Add drag and drop events to tasks and drop areas
+
 function addDragDropEvents() {
   // Get all task elements
   const tasks = document.querySelectorAll(".task");
@@ -180,7 +212,7 @@ function addDragDropEvents() {
   // Get all drop areas
   const dropAreas = document.querySelectorAll(".drop-area");
 
-  // Add a 'dragover' event listener to each drop area
+  // Add a event listener to each drop area
   dropAreas.forEach((dropArea) => {
     dropArea.addEventListener("dragover", dragOverHandler);
     dropArea.addEventListener("dragenter", dragEnterHandler);
@@ -217,20 +249,24 @@ function dragDropHandler(e) {
 
   const targetColumn = this.closest(".column");
 
+  // Find the next or previous sibling element, if any, to determine where to drop the task
   const sibling = this.nextElementSibling || this.previousElementSibling;
   const siblingId = sibling ? sibling.firstElementChild.id : 0;
 
+  // Determine the drop direction based on the position of the sibling element relative to the current element
   const dropDirection = sibling
     ? sibling === this.nextElementSibling
       ? -1
       : 1
     : 0;
 
+  // Call the function to swap the position of the tasks based on the drop direction and sibling element
   swapTaskPosition(targetColumn, siblingId, dropDirection);
 }
 
 function renderTasks(column) {
   let tasksHtml = "";
+  // loop through each task in the column and create the corresponding HTML
   column.tasks.forEach((item) => {
     tasksHtml += `
     <div class="drop-area"></div>
@@ -244,6 +280,7 @@ function renderTasks(column) {
 
     `;
   });
+  // if add a drop area at the bottom of the column
   tasksHtml += `<div class="drop-area"></div>`;
 
   const tasksEl = document.createElement("div");
@@ -264,8 +301,11 @@ function renderTasks(column) {
 
 function render() {
   const tasksData = fetchTasks();
+
+  // Clear the content of the root container
   containerRoot.innerHTML = "";
 
+  // Loop through each column in tasksData
   tasksData.forEach((column) => {
     const columnEl = document.createElement("div");
     columnEl.className = "column";
@@ -275,6 +315,7 @@ function render() {
     columnTitleEl.innerText = column.title;
     columnEl.appendChild(columnTitleEl);
 
+    // Render tasks for the current column and append it to the column element
     const tasksEl = renderTasks(column);
     if (column.id === 3) {
       tasksEl.style.textDecoration = "line-through";
