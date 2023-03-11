@@ -192,6 +192,7 @@ function addDragDropEvents() {
 let draggedTask;
 
 function dragStartHandler() {
+  e.preventDefault();
   draggedTask = this;
 }
 
@@ -205,6 +206,7 @@ function dragEnterHandler(e) {
 }
 
 function dragLeaveHandler() {
+  e.preventDefault();
   this.classList.remove("drop-area-active");
 }
 
@@ -228,7 +230,6 @@ function dragDropHandler(e) {
 }
 
 function renderTasks(column) {
-
   let tasksHtml = "";
   column.tasks.forEach((item) => {
     tasksHtml += `
