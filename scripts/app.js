@@ -223,8 +223,8 @@ function addDragDropEvents() {
 
 let draggedTask;
 
-function dragStartHandler() {
-  e.preventDefault();
+function dragStartHandler(e) {
+  e.dataTransfer.setData("text/plain", e.target.id);
   draggedTask = this;
 }
 
@@ -238,7 +238,6 @@ function dragEnterHandler(e) {
 }
 
 function dragLeaveHandler() {
-  e.preventDefault();
   this.classList.remove("drop-area-active");
 }
 
