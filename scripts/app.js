@@ -1,5 +1,3 @@
-const containerRoot = document.querySelector(".container");
-
 // Fetch Tasks from localSorage
 
 function fetchTasks() {
@@ -299,6 +297,7 @@ function renderTasks(column) {
 }
 
 function render() {
+  const containerRoot = document.querySelector(".container");
   const tasksData = fetchTasks();
 
   // Clear the content of the root container
