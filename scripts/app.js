@@ -131,9 +131,8 @@ function taskToAdd(addTaskBtn, targetColumnId) {
     taskInput.contentEditable = "true";
     taskInput.style.cursor = "auto";
 
-    // Save the task when a click occurs outside the task box
-
-    taskInput.addEventListener("blur", function () {
+    function saveNewTask() {
+      taskInput.removeEventListener("blur", saveNewTask);
       taskInput.contentEditable = false;
       taskInput.style.cursor = "pointer";
 
@@ -142,7 +141,21 @@ function taskToAdd(addTaskBtn, targetColumnId) {
       } else {
         render();
       }
-    });
+    }
+
+    // Add event listener to Save the task when a click occurs outside the task box
+    taskInput.addEventListener("blur", saveNewTask);
+
+    // Save the task when the enter key is pressed
+    const handleKeyPress = (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        saveNewTask();
+      }
+    };
+
+    // Add event listener for the "keypress" event
+    taskInput.addEventListener("keypress", handleKeyPress);
 
     // Add the new task element to the task list and focus on it
     const tasksList = addTaskBtn.parentElement.querySelector(".tasks");
