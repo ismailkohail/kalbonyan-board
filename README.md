@@ -1,6 +1,6 @@
 # Kalbonyan Board
 
-[Demo](https://ismailkohail.github.io/kalbonyan-board/)
+The project [Demo](https://ismailkohail.github.io/kalbonyan-board/) link
 
 
 ## Introduction
@@ -22,7 +22,7 @@ This is a Kanban board web application built using HTML, CSS and JavaScript. A K
 
 ## Usage
 
-- To add a new task, click on the "Add task" button in the column where you want to add the task. Type the task content and click anywhere on the page to save.
-- To edit a task, click on the "Edit" button next to the task content. Edit the task content and click anywhere on the page to save.
+- To add a new task, click on the "Add task" button in the column where you want to add the task. Type the task content and click enter, or anywhere on the page to save the task.
+- To edit a task, click on the "Edit" button next to the task content. Edit the task content and click enter, or anywhere on the page to save the task.
 - To delete a task, click on the "Delete" button next to the task content.
 - To change the position of a task, drag and drop it to the desired position in the same column or to another column.
