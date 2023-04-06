@@ -1,7 +1,7 @@
 # Kalbonyan Board
 
+![project-preview](img/project-preview.png)
 The project [Demo](https://ismailkohail.github.io/kalbonyan-board/) link
-
 
 ## Introduction
 
