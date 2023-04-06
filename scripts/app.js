@@ -170,7 +170,6 @@ function taskToDeleteHandler() {
   const targetTaskId = taskEl.id;
   deleteTask(targetTaskId);
 }
-
 // Update a task when the edit button is clicked
 function taskToUpdateHandler() {
   const taskToUpdate = this.parentNode.previousElementSibling;
@@ -189,9 +188,9 @@ function taskToUpdateHandler() {
 
   const originalTaskContent = taskToUpdate.textContent;
 
-  // Update the task when a click occurs outside the task box
+  // Update the task when a click occurs outside the task box or when the enter key is pressed
 
-  taskToUpdate.addEventListener("blur", function () {
+  const saveChanges = () => {
     // Disable content editing
     taskToUpdate.contentEditable = false;
 
@@ -206,7 +205,25 @@ function taskToUpdateHandler() {
     } else {
       render();
     }
-  });
+
+    // Remove event listeners
+    taskToUpdate.removeEventListener("blur", saveChanges);
+    taskToUpdate.removeEventListener("keypress", handleKeyPress);
+  };
+
+  // Add event listener to save the changes when a click occurs outside the task box
+  taskToUpdate.addEventListener("blur", saveChanges);
+
+  // Save the changes when the enter key is pressed
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      saveChanges();
+    }
+  };
+
+  // Add event listener for the "keypress" event
+  taskToUpdate.addEventListener("keypress", handleKeyPress);
 }
 
 // Add drag and drop events to tasks and drop areas
